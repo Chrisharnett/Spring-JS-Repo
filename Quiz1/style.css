@@ -1,0 +1,49 @@
+
+
+html {
+    box-sizing: border-box;
+    font-family: 20px Garamond, serif;
+    color: black;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+  }
+@media only screen  and (max-width: 600px){
+
+    table {
+        border: 2px solid coral;
+        border-radius: 5px;
+        background-color: lemonchiffon;
+        width: auto;
+        display: grid;
+        gap: 10px;
+        margin: 0 auto;
+    }
+    #calendar > * {
+        padding: 10px;
+    }
+    
+  }
+  @media only screen  and (min-width: 600px){
+    table {
+        border: 2px solid coral;
+        border-radius: 5px;
+        background-color: lemonchiffon;
+        width: auto;
+        gap: 10px;
+        margin: 0 auto;
+        display: none;
+    }
+    tr > * {
+        padding: 10px;
+    }
+    .buttons > * {
+        margin: 10px;
+    }
+    #message {
+        text-size-adjust: 8px;
+    }
+    .regatta {
+        font-style: italic;
+    }
+  }

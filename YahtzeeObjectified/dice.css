@@ -1,0 +1,57 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+    margin: 5em auto;
+    width: 600px;
+    border: 3px solid lightblue;
+    padding: 0 2em 1em;
+}
+label {
+    font-weight: bolder;
+    font-size: x-large;
+}
+.container{
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 10px
+}
+ul {
+    list-style-type: none;
+    order: 1;
+    grid-column: 3 / 13;
+    display: flex;
+}
+.score {
+    order: 2;
+    grid-column: 1 / 2;
+    display: flex;
+}
+#yahtzee {
+    color: red;
+    font-weight: bolder;
+    font-size: x-large;
+}
+span {
+    order: 3;
+    grid-column: 10 / 11;
+}
+#total {
+    color: green;
+    border: 3px solid lightslategray;
+    width: 30px;
+    display: none;
+}
+li > img {
+    height: 50px;
+    width: 50px;
+    padding: 5px;
+}
+button {
+    background-color: lightblue;
+    height: 50px;
+    width: 600px;
+    grid-column: 1 / 11 ;
+    order: 4;
+    border: none;
+    font-size: large;
+}

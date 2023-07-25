@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vex flow</title>
+</head>
+<body>
+    <h1>G Long Tone</h1>
+    <div class = "vexbox"></div>
+        <div id="output"></div>
+    <script src="https://cdn.jsdelivr.net/npm/vexflow@4.0.3/build/cjs/vexflow.js"></script>
+
+    <script>
+       const { Factory } = Vex.Flow;
+
+        // Create a VexFlow renderer attached to the DIV element with id="output".
+        const vf = new Factory({ renderer: { elementId: 'output' } });
+        const score = vf.EasyScore();
+        const system = vf.System();
+
+        // Create a 4/4 treble stave and add two parallel voices.
+        system.addStave({
+        voices: [
+        
+            // Bottom voice has two half notes, with stems down.
+            score.voice(score.notes('G4/w'))
+        ]
+        }).addClef('treble').addTimeSignature('4/4');
+
+        // Draw it!
+        vf.draw();
+    </script>
+</body>
+</html>

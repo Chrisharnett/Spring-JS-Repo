@@ -1,0 +1,19 @@
+span {
+    display:inline-block;
+    background-color:whitesmoke;
+    border-radius:5px;
+    border:1.5px solid blue;
+    padding:2px;
+    margin:2px;
+    user-select:none;
+}
+
+span:hover {
+    cursor:pointer;
+    box-shadow:2px 2px 1px gray ;
+}
+
+span:active {
+    background-color:rgb(0, 162, 255);
+}
+

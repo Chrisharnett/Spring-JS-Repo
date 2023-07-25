@@ -1,0 +1,108 @@
+/* orange, maroon, mediumspringgreen, 
+forestgreen, bisque, lemonchiffon, brown, 
+coral, tomato, steelblue */
+
+html {
+    box-sizing: border-box;
+    font-family: Calibri, Verdana, Geneva, Tahoma, sans-serif;
+    color: black;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+  }
+@media only screen  and (max-width: 600px){
+
+    .container {
+        border: 2px solid coral;
+        border-radius: 5px;
+        background-color: lemonchiffon;
+        width: auto;
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 10px;
+        margin: 0 auto;
+    }
+    .container > * {
+        padding: 10px;
+    }
+    h1{
+        grid-column: 1 / 6;
+        order: 1;
+    }
+    .previousEaster{
+        grid-column: 1 / 6;
+        order: 2;
+    }
+    #lastEasterInput {
+        padding: 3px;
+    }
+    .nextEaster {
+        grid-column: 1 / 6;
+        order: 3;
+        display: block;
+    }
+    button {
+        border-radius: 5px;
+        background-color: bisque;
+        border: 2px solid coral;
+    }
+    .nextDate{
+        border: 1px solid black;
+        background-color: white;
+        padding: 3px;
+    }
+    .daysAway {
+        padding: 3px;
+        margin-left: 0px;
+        color: tomato;
+        display: block;
+    }
+  }
+  @media only screen  and (min-width: 600px){
+    .container {
+        border: 2px solid coral;
+        border-radius: 5px;
+        background-color: lemonchiffon;
+        width: 600px;
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 10px;
+        margin: 0 auto;
+    }
+
+    .container > * {
+        padding: 10px;
+    }
+    h1{
+        grid-column: 1 / 6;
+        order: 1;
+    }
+    .previousEaster{
+        grid-column: 1 / 6;
+        order: 2;
+    }
+    #lastEasterInput {
+        padding: 3px;
+    }
+    .nextEaster {
+        grid-column: 1 / 6;
+        order: 3;
+        display: block;
+    }
+
+    button {
+        border-radius: 5px;
+        background-color: bisque;
+        border: 2px solid coral;
+    }
+    .nextDate{
+        border: 1px solid black;
+        background-color: white;
+        padding: 3px;
+    }
+    .daysAway {
+        padding: 3px;
+        margin-left: 20px;
+        color: tomato;
+    }
+  }

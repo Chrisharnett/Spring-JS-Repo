@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Image</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="chat.js" defer></script>
+    <script src="chat_lib.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <img src="./Images/PurpleSaxSmall.jpeg" alt="Saxophone player Chris Harnett" class="pic">
+        <div class="commentbox">
+            <div id="daterow">
+                <span class="date">YY MM DD HH:MM ago userx said</span>
+                <span class="count">123HEARTPLUS</span>
+            </div>
+            <p class="comment">Comment Line 1</p>
+        </div>
+        <!-- <div class="subcommentbox">
+            <div id="daterow">
+                <p class="date">YY MM DD HH:MM ago userx said</p>
+                <p class="count">123HEARTPLUS</p>
+            </div>            
+            <p class="comment">Comment Line 1</p> -->
+        <!-- </div> -->
+        <div>
+            <label for="Comment"></label>
+            <input type="text" id="newComment" placeholder="Your comment goes here.">
+            <input type="button" id="add_comment" value="Comment"><span></span>
+        </div>
+    </div>
+</body>
+</html>

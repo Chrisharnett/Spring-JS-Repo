@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+        <title>Take A Seat</title>
+
+        <!-- link in the CSS file -->
+        <link href="q2.css" rel="stylesheet" type="text/css">
+
+        <!-- link in jQuery -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+
+        <!-- link in our js/jquery code -->
+        <script src="q2.js" defer></script>
+
+        <!-- Link in objects/classes -->
+        <script src="takeASeat_lib.js" defer></script>
+
+    </head>
+    <body>
+        <div id="deck"> <!-- A div for the deck of the aircraft -->
+            <div class="row"> <!-- a row div for spacing purposes -->
+                <div class="seat" id="1A">1A</div>
+                <div class="aisle"></div>
+                <div class="seat" id="1B">1B</div>
+            </div>
+            <div class="row">
+                <div class="seat" id="2A">2A</div>
+                <div class="aisle"></div>
+                <div class="seat" id="2B">2B</div>
+            </div>
+            <div class="row">
+                <div class="seat" id="3A">3A</div>
+                <div class="aisle"></div>
+                <div class="seat" id="3B">3B</div>
+            </div>
+        </div>
+        <br><br>
+        <fieldset id="infoArea">
+            <legend> Passenger Information </legend>
+
+            <table>
+                <tr>
+                    <td class="rjust"><label for="passName">Passenger Name: </label></td>
+                    <td><input id="passName" type="text"></td>
+                </tr>
+                <tr>
+                    <td class="rjust"><label for="passSeat">Seat: </label></td>
+                    <td><input id="passSeat" type="text" size="2" maxlength="2"></td>
+                </tr>
+                <tr>
+                    <td class="rjust"><label for="passMeal">Meal Request: </label></td>
+                    <td><input id="passMeal" type="text" size="40"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="button" id="board" value="Board"></td>
+                </tr>
+            </table>
+        </fieldset>
+    </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Shed</title>
+    <link rel="stylesheet" href="method.css">
+</head>
+<body>
+    <div class="container">
+        <div class="notation">
+            <h2>G Long Tone</h2>
+            <div class="vexbox">
+            </div>
+                <div id="output">
+                </div>
+        </div>
+        <div class="metronome">
+            <h2>metronome</h2>
+        </div>
+        <div class="timer">
+            <h2>timer</h2>
+            <button id="start">Start</button>
+            <button id="reset">Reset</button>
+        </div>
+        <div class="description">
+            <p id="descriptiontext">Description</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vexflow@4.0.3/build/cjs/vexflow.js" defer></script>
+
+    <script>
+       const { Factory } = Vex.Flow;
+
+        // Create a VexFlow renderer attached to the DIV element with id="output".
+        const vf = new Factory({ renderer: { elementId: 'output' } });
+        const score = vf.EasyScore();
+        const system = vf.System();
+
+        // Create a 4/4 treble stave and add two parallel voices.
+        system.addStave({
+        voices: [
+        
+            // Bottom voice has two half notes, with stems down.
+            score.voice(score.notes('G4/w'))
+        ]
+        }).addClef('treble').addTimeSignature('4/4');
+
+        // Draw it!
+        vf.draw();
+    </script>
+</body>
+</html>

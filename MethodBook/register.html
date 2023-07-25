@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="method.css">
+</head>
+<body>
+    <div class="container">
+        <div class="notation">
+            <h2 id="sign-up">Sign-Up for practice sessions</h2>
+            <form class="container2">
+                <div class="name">
+                    <label for="first_name">First Name: </label>
+                    <input type="text" name="first_name" id="first_name">
+                    <span>*</span>
+                </div>
+                <div class = "email">
+                    <label for="email">Email Address</label>
+                    <input type="text" name="email_address" id="email">
+                    <span>*</span>
+                    <label for="confirm_email">Confirm Email Address</label>
+                    <input type="text" name="confirm_email" id="confirm_email">
+                    <span>*</span>
+                </div>                 
+                <div>
+                    <label for="instrument">Main Instrument</label>
+                    <select name="instrument" id="instrument">
+                        <option value="">Alto saxophone</option>
+                        <option>Tenor Saxophone</option>
+                        <option>Clarinet</option>
+                    </select>
+                    <span>*</span>
+                </div>
+                <div>
+                    <label>Focus:</label>
+                    <input type="radio" name="contact" id="text"
+                        value="improvisation" checked>Improvisation
+                    <input type="radio" name="contact" id="email"
+                        value="email">Email
+                    <input type="radio" name="contact" id="none"
+                        value="none">Don't contact me
+                </div>
+                <div>
+                    <label>Terms of Service:</label>
+                    <input type="checkbox" name="terms" id="terms"
+                        value="yes">I accept
+                    <span>*</span>
+                </div>
+            </form>
+            
+        </div>
+        <div class="metronome">
+            <h2></h2>
+            
+        </div>
+        <div class="timer">
+            <div>
+                <label for="sign_up"></label>
+                <button id="sign_up" id="sign_up">Sign-Up</button>
+                <label for="clear"></label>
+                <button id="clear" id="clear">Clear Form</button>
+            </div>
+        </div>
+        <div class="description">
+            <p id="descriptiontext">Description</p>
+        </div>
+    </div>
+    <script src="register.js"></script> 
+</body>
+</html>

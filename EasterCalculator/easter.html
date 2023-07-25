@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="easter.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.slim.js" integrity="sha256-7GO+jepT9gJe9LB4XFf8snVOjX3iYNb0FHYr5LI1N5c=" crossorigin="anonymous"></script>
+    <script src="easter.js" defer></script>
+    <title>Easter Calculator</title>
+</head>
+<body>
+    <main class="container">
+        <h1>Easter Calculator</h1>
+        <div class="previousEaster">
+            <label for="lastEaster" id="lastEasterLabel">Previous Easter: 
+            <input type="text" id="lastEaster" placeholder="yyyy-mm-dd">
+            </label>
+        </div>        
+        <div class="nextEaster">
+            <button id="calcNextEaster">Calc Next Easter</button>
+            <span class="nextDate">yyyy-mm-dd</span>
+            <span class="daysAway">XXX days away</span>
+        </div>
+    </main>
+</body>
+</html>

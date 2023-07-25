@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This Shed</title>
+    <link rel="stylesheet" href="method.css">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/vexflow@4.0.3/build/cjs/vexflow.js" defer></script>
+    <script type="module"id="exercise_script" src="./notationScripts/G4_to_D5_8ths.js" title="" defer></script>
+    <script type="module" src="timerb.js" defer></script>
+</head>
+<body>
+    <!-- <ul id="exercise_list">
+        <li><a href="G4_wholeNote.js" caption="G Whole Note"></a></li>
+        <li><a href="G4_to_D5_8ths.js" caption="G to D Eigth Notes"></a></li>
+        <li><a href="C4_wholeNote.js" caption="C Whole Note"></a></li>
+    </ul> -->
+    <div class="container">
+        <div class="notation">
+            <h2 id="exercise_title"></h2>
+            <div class="vexbox">
+            </div>
+                <div id="output">
+                </div>
+        </div>
+        <div class="metronome">
+            <h2>metronome</h2>
+        </div>
+        <div class="timer">
+            <h2>timer</h2>
+            <span id="countDown"></span>
+            <button id="start">Start</button>
+            <button id="reset" disabled="true">Reset</button>
+        </div>
+        <div class="description">
+            <p id="descriptiontext">Description</p>
+        </div>
+    </div>
+   
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dice.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.slim.js" integrity="sha256-7GO+jepT9gJe9LB4XFf8snVOjX3iYNb0FHYr5LI1N5c=" crossorigin="anonymous"></script>
+    <script src="dice.js" defer></script>
+    <title>Dice Game</title>
+</head>
+<body class="container">
+    <ul id="diceImages">
+        <li><a href="./diceImages/WhiteSquare.svg" title="a blank image"></a></li>
+        <li><a href="./diceImages/Dice-1.svg" title="a dice of value 1"></a></li>
+        <li><a href="./diceImages/Dice-2.svg" title="a dice of value 2"></a></li>
+        <li><a href="./diceImages/Dice-3.svg" title="a dice of value 3"></a></li>
+        <li><a href="./diceImages/Dice-4.svg" title="a dice of value 4"></a></li>
+        <li><a href="./diceImages/Dice-5.svg" title="a dice of value 5"></a></li>
+        <li><a href="./diceImages/Dice-6.svg" title="a dice of value 6"></a></li>
+    </ul>
+    <ul id="dice">
+        <li><img src="./diceImages/WhiteSquare.svg" alt="a blank image" id="dice1"></li>
+        <li><img src="./diceImages/WhiteSquare.svg" alt="a blank image" id="dice2"></li>
+        <li><img src="./diceImages/WhiteSquare.svg" alt="a blank image" id="dice3"></li>
+        <li><img src="./diceImages/WhiteSquare.svg" alt="a blank image" id="dice4"></li>
+        <li><img src="./diceImages/WhiteSquare.svg" alt="a blank image" id="dice5"></li>
+    </ul>
+    <div class="score">
+        <label>Total:</label>
+        <label id="total"></label>
+    </div>    
+    <span id="yahtzee"></span>
+    <button id="rollDice">Roll Dice</button>
+</body>
+</html>
