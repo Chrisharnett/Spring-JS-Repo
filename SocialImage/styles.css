@@ -1,34 +1,52 @@
 /* #781C68, #319DA0 #FFD39A, #FFF5El */
 
 .container{
-    padding: 100px;
+    padding: 10px;
     border: 10px solid #781C68;
-    display: grid;
+    display: flex;
+    flex-flow: column;
+    position: relative;
+    align-items: center;
 }
 
 .pic{
-    width: 500px;
+    width: 400;
 }
 .commentbox{
     border: 3px solid #319DA0;
+    border-radius: 10px;
     margin: 10px;
+    padding: 5px;
+    width: 500px;
 }
-.daterow{
+.daterow {
+    margin: 3px;
+    gap: 30px;
+    display: flex;
+}
+.commentRow{
+    margin: 3px;
     display: inline;
 }
-.count{
-    right: 0;
+
+.likeIt {
+    float: right;
 }
-/* .subcommentbox{
-    border: 3px solid #FFD39A;
-    margin: 10px;
-} */
+.stats {
+    float: right;
+}
+
 #newComment{
+    padding: 5px;
     border: 3px solid #FFD39A;
+    border-radius: 15px;
     margin: 10px;
     height: 50px;
-    width: 550px;
+    width: 100%;
+    justify-content: end;
+    background-color: azure;
 }
 #add_comment{
-    
+    right: 0px;
+    justify-content: end;
 }
