@@ -29,13 +29,27 @@
     display: inline;
 }
 
-.likeIt {
-    float: right;
-}
-.stats {
-    float: right;
+footer {
+    width: 75%;
+    display: inline;
 }
 
+.likeIt, .stats, .userDate {
+    float: right;
+}
+/* .stats {
+    float: right;
+} */
+.user {
+    float: left;
+}
+/* .userDate{
+    float: right;
+ } */
+.newCommentClass{
+    width: 75%;
+    padding: 10px;
+}
 #newComment{
     padding: 5px;
     border: 3px solid #FFD39A;
