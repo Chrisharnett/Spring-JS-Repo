@@ -8,16 +8,87 @@
     position: relative;
     align-items: center;
 }
-
+.imageContainer{
+    position: relative;
+}
 .pic{
     width: 400;
 }
-.commentbox{
+.iconOverlay{
+    position: absolute;
+    z-index: 2;
+    right: 0;
+    bottom: 0;
+    background-color: aliceblue;
+    opacity: 0.7;
+    padding: 2px;
+
+}
+
+.iconOverlay > * {
+    padding: 2px;
+}
+
+.toolTipContainer{
+    position: relative;
+    display: inline-flex;
+    place-content: center;
+}
+.toolTip{
+    display: none;
+    position: absolute;
+    top: -60px;
+    z-index: 1;
+    background: #00732c;
+    padding: 8px;
+    font-size: 1rem;
+    color: #fff;
+    border-radius: 2px;
+    animation: fadeIn 0.6s;
+}
+.toolTip:before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -8px;
+    border: 8px solid transparent;
+    border-top: 8px solid #00732c;
+  }
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+   }
+.commentbox, .subComment{
+    position: relative;
     border: 3px solid #319DA0;
     border-radius: 10px;
     margin: 10px;
     padding: 5px;
     width: 500px;
+    left: 0px;
+}
+.subCommentBox{
+    position: relative;
+    width: 600px;
+    display: inline-flex;
+    left: 0;
+}
+.subComment{
+    position: relative;
+    border: 3px solid peachpuff;
+    left: 30px;
+}
+#connector{
+    position: relative;
+    font-size: 100px;
+    left: 50px;
+    bottom: 59px;
+    z-index: 10;
 }
 .daterow {
     margin: 3px;
@@ -34,18 +105,13 @@ footer {
     display: inline;
 }
 
-.likeIt, .stats, .userDate {
+.likeIt, .stats, #userDate {
     float: right;
 }
-/* .stats {
-    float: right;
-} */
-.user {
+
+#user {
     float: left;
 }
-/* .userDate{
-    float: right;
- } */
 .newCommentClass{
     width: 75%;
     padding: 10px;
@@ -64,3 +130,5 @@ footer {
     right: 0px;
     justify-content: end;
 }
+
+

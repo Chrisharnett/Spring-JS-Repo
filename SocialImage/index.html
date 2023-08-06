@@ -6,19 +6,26 @@
     <title>Social Image</title>
     <link rel="stylesheet" href="styles.css">
     <script src="chat.js" defer></script>
-    <script src="chat_lib.js" defer></script>
+    <!-- <script src="chat_lib.js" defer></script> -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 </head>
 <body>
     <div class="container">
-        <img src="./Images/PurpleSaxSmall.jpeg" alt="Saxophone player Chris Harnett" class="pic">
+        <div class="imageContainer">
+            <img src="./Images/PurpleSaxSmall.jpeg" alt="Saxophone player Chris Harnett" class="pic">
+            <div class="iconOverlay">
+                <span id="picLikeCount">0</span>
+                <span class="toolTipContainer"><span id="heartPic" title="Click to like!">&#128151</span></span>
+                <span class="toolTipContainer"><span id="picComment" title="Leave a comment.">&#10133</span></span>
+            </div>
+        </div> 
+        <div id="latestComment"></div>      
         <div class="newCommentClass">
             <label for="newComment"></label>
             <input type="text" id="newComment" placeholder="Your comment goes here.">
-            <input type="button" id="add_comment" value="Comment"><span></span>
         </div>
         <footer>
-            <span class="user"></span><span class="userDate"></span>
+            <span id="user"></span><span id="userDate"></span>
         </footer>
     </div>
 </body>
