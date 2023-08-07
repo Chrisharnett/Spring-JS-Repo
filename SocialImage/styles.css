@@ -71,12 +71,14 @@
     padding: 5px;
     width: 500px;
     left: 0px;
+    /* z-index: 10; */
 }
 .subCommentBox{
     position: relative;
     width: 600px;
     display: inline-flex;
     left: 0;
+    /* z-index: 0; */
 }
 .subComment{
     position: relative;
@@ -87,9 +89,30 @@
     position: relative;
     font-size: 100px;
     left: 50px;
-    bottom: 59px;
-    z-index: 10;
+    bottom: 50px;
+    z-index: 0;
+    height: 100px;
+    /* display: none; */
 }
+
+/* .vl {
+    border-left: 6px solid green;
+    height: 100%;
+    position: relative;
+    left: 50%;
+    margin-left: -3px;
+    top: 0;
+}
+
+.hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+} */
+
 .daterow {
     margin: 3px;
     gap: 30px;
