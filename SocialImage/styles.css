@@ -77,7 +77,7 @@
     position: relative;
     width: 600px;
     display: inline-flex;
-    left: 0;
+    left: 0px;
     /* z-index: 0; */
 }
 .subComment{
@@ -95,24 +95,6 @@
     /* display: none; */
 }
 
-/* .vl {
-    border-left: 6px solid green;
-    height: 100%;
-    position: relative;
-    left: 50%;
-    margin-left: -3px;
-    top: 0;
-}
-
-.hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0;
-} */
-
 .daterow {
     margin: 3px;
     gap: 30px;
@@ -128,7 +110,7 @@ footer {
     display: inline;
 }
 
-.likeIt, .stats, #userDate {
+.commentView, .stats, #userDate {
     float: right;
 }
 

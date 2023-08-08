@@ -5,6 +5,8 @@ let allComments = []
 //Comment counter
 let commentId = 0;
 
+let likeCountDict = []
+
 //Create a random user with AJAX
 const getUser = () => {
     return  fetch("https://jsonplaceholder.typicode.com/users")
@@ -13,8 +15,8 @@ const getUser = () => {
 };
 
 // Closure to add a like
-const addLikes = () => {
-    let count = 0;
+const addLikes = (id) => {
+    let count = parseInt($('#likeCount' + id).text());
     return {
         add() {
             count ++;
@@ -26,31 +28,121 @@ const addLikes = () => {
 // Update the current time.
 const timeUpdate = () =>{
     $('#userDate').text((new Date().toLocaleString()));
-}
+};
 
-const store = (comment) =>{
+const collect = (comment) => {
     // Collect all the comment and subcomment children of the #latestComment class in an array. Make a function that's called.
-    allComments.add(comment);
+    allComments.push(comment);
     const json = JSON.stringify(allComments);
     localStorage.comments = json;
+};
+
+const timeStamp = () => {
+    let d = new Date();
+    return (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
+};
+
+const collectLikes = (id, likeCount) => {
+    let l = {
+        element: '#likeCount' + id,
+        likeCount: likeCount
+    }
+    likeCountDict.push(l)
+    
+    const jsonLikes = JSON.stringify(likeCountDict);
+    localStorage.likes = jsonLikes;
+}
+
+const createAComment = (comment, user, id, previousCommentId, postTimeStamp) => {   
+
+    // create a new comment.
+    let c = new Comment(comment, user, id, previousCommentId, postTimeStamp);
+    
+    // Post the comment
+    if (c.previousCommentId != -1){
+        c.postSubComment();
+    }
+    else{
+        c.postComment();
+    }
+    
+    //Store the comment.
+    collect(c);
+    
+
+    // Update timestamp.
+    setInterval(function () {
+        $('.date' + c.getId()).text(c.getTimeString())
+    }, 60000);
+
+    // Like and update comment likes
+    let l = addLikes(c.getId())
+    $('#likeComment' + c.getId()).on("click", () => {   
+        $('#likeCount' + c.getId()).text(l.add())
+        c.setLikeCount($('#likeCount' + c.getId()).text())
+        collectLikes(c.id, c.likeCount);
+    });
+
+    // Wastebasket to delete the comment within 30 secs.
+    $(".wastebasket" + c.getId()).on('click',() => {
+        // delete the comment.
+        $("#commentBox" + c.getId()).remove();
+        // remove the comment from the allComments array       
+    });
+    // Turn off delete listener and remove icon.
+    setTimeout(function () {
+        $(".wastebasket" + c.getId()).off();
+        $(".wastebasket" + c.getId()).css('display', 'none');
+    }, 30000);
+
+    $("#up" + c.getId()).on("click", () => {
+        // TODO: expand multi-line comment
+    });
+
+    $("#down" + c.getId()).on("click", () => {
+        //TODO: Contract multi-line comment
+    });
+
+    let previous = commentId;
+    // create subcomment listener
+    $("#addSubComment" + c.getId()).on("click", () => {       
+        let user = "STEVEDEFAULT";
+        commentId ++;
+        let id = commentId;
+        createAComment($("#newComment").val(), user, id, previous, timeStamp()); 
+            
+    });
+
+    // Clear and focus newComment box
+    $("#newComment").val("")
+    $("#newComment").focus()
+    //Call change user at the end.
 }
 
 $( () => {
     // TODO check for persistent json to make comments stay 'sessionstorage.' vs localstorage
-    const json = localStorage.comments;
-    if (json) {
-        let allComments = JSON.parse(json);
+    const jsonComments = localStorage.comments;
+    if (jsonComments) {
+        let allComments = JSON.parse(jsonComments);
         for (let comment of allComments) {
-            if (comment.previousCommentId != -1) {
-                comment.postSubComment;
+            let d = new Date(comment.postTimeStamp);
+            createAComment(comment.comment, comment.user, comment.id, comment.previousCommentId, d);
+            if (comment.likeCount > 0){
+                $('#likeCount' + comment.id).text(comment.likeCount);  
             }
-            else {
-                comment.postComment;
-            };
-            
+                         
         };
         
-    };
+    }
+
+    const jsonLikes = localStorage.likes;
+    if (jsonLikes){
+        likeCountDict = JSON.parse(jsonLikes);
+    }
+    for (let target of likeCountDict){
+        let t = target.element;
+        $(t).text(target.likeCount);
+    }
 
     // TODO use AJAX to get a random user and change it with each comment.
     let user = "ChrisDEFAULT";
@@ -62,88 +154,18 @@ $( () => {
     $('#user').text(user);
     
     // Set and display the pic likes.
-    let likes = addLikes();
+    let likes = addLikes(0);
     $('#heartPic').on("click", () => {
-        $('#picLikeCount').text(likes.add());
+        $('#likeCount0').text(likes.add());
+        collectLikes(0, $('#likeCount0').text())
     });
         
     $('#picComment').on("click", () => {
         //increment the comment id.
-        commentId ++;      
-        // create a new comment. 
-        let comment = new Comment($("#newComment").val(), user, commentId );
-
-        //Store the comment.
-        store(comment);
-
-        //Post the comment.
-        comment.postComment();
-
-        const commentJson = 
-        
-        // Update timestamp.
-        setInterval(function () {
-            $('.date' + comment.getId()).text(comment.getTimeString())
-        }, 60000);
-
-        // Like and update comment likes
-        let l = addLikes()
-        $('#likeComment' + comment.getId()).on("click", () => {   
-            $('#likeCount' + comment.getId()).text(l.add())
-        });
-
-        $("#up" + comment.getId()).on("click", () => {
-            // TODO: expand multi-line comment
-        });
-
-        $("#down" + comment.getId()).on("click", () => {
-            //TODO: Contract multi-line comment
-        });
-        
-        let previousCommentId = commentId;
-        
-        // create subcomment
-        $("#addSubComment" + comment.getId()).on("click", () => {
-            let user = "STEVEDEFAULT";
-            commentId ++;
-            let id = commentId;
-            const subComment = new Comment($("#newComment").val(), user, id, previousCommentId)
-            store(subComment);
-            subComment.postSubComment();
-            $("#commentBox" + subComment.getId()).addClass('subComment');
-
-            // Update timestamp.
-            setInterval(function () {
-                $('.date' + subComment.getId()).text(subComment.getTimeString())
-            }, 1000);
-
-            // Like and update subComment likes
-            let l = addLikes();
-            $('#likeComment' + subComment.getId()).on("click", () => {
-                // subComment.addLike()
-                $('#likeCount' + subComment.getId()).text(l.add());
-            });
-
-            $("#up" + subComment.getId()).on("click", () => {
-                // TODO: expand multi-line comment
-            });
-
-            $("#down" + subComment.getId()).on("click", () => {
-                //TODO: Contract multi-line comment
-            });
-
-            // Clear and focus newComment box
-            $("#newComment").val("")
-            $("#newComment").focus()
-            //Call change user at the end.  
-                
-        });
-
-        // Clear and focus newComment box
-        $("#newComment").val("")
-        $("#newComment").focus()
-        //Call change user at the end.
-
+        commentId ++; 
+        let d = new Date();
+        let timestamp = d.getMonth() + "/" + d.getDay() + "/" + d.getYear() + " " + d.getHours() + ":" + d.getMinutes();
+        let comment = createAComment($("#newComment").val(), user, commentId, -1, timeStamp());
         });
     
     });
