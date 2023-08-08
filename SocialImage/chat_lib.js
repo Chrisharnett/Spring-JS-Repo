@@ -50,9 +50,9 @@ class Comment {
       "</span> <span class='stats'>" + 
       "<span id='likeCount" + this.id + "'>0</span>" + 
       "<span id='likeComment" + this.id + "' title='Like this comment!'>&#128151</span>" +
-      "<span id='addSubComment" + this.id + "' title='Leave a comment'>&#10133</span>" +
+      "<span id='addSubComment" + this.id + "' title='Left click to leave a comment. Right click to delete comment.'>&#10133</span>" +
       "</span><div class='commentRow'></div><div class='comment'>" + this.comment +
-      "</div><span class='commentView'><span class='wastebasket" + this.id + "'>&#128465;</span><span id='expand" + this.id + "' title='expand'>&#11014</span>"+
+      "</div><span class='commentView'><span id='expand" + this.id + "' title='expand'>&#11014</span>"+
       "<span id='contract" + this.id + "' title='contract'>&#11015</span></span></div></div>"));
   }
   postSubComment(){
@@ -63,10 +63,10 @@ class Comment {
       "</span> <span class=stats>" + 
       "<span id='likeCount" + this.id + "'>0</span>" + 
       "<span id='likeComment" + this.id + "' title='Like this comment!'>&#128151</span>" +
-      "<span id='addSubComment" + this.id + "' title='Leave a comment'>&#10133</span>" +
+      "<span id='addSubComment" + this.id + "' title='Left click to leave a comment. Right click to delete comment.'>&#10133</span>" +
       "</span></div><div class='commentRow'><div class='comment'>" + this.comment +
-      "</div><span class='commentView'><span class='wastebasket" + this.id + "'>&#128465;</span><span id='expand" + this.id + "' title='expand'>&#11014</span>"+
-      "<span id=contract'" + this.id + "' title='contract'>&#11015</span>"+"</span></div></div></div>"));
+      "</div><span class='commentView'><span id='expand" + this.id + "' title='expand'>&#11014</span>"+
+      "<span id=contract'" + this.id + "' title='contract comment window'>&#11015</span>"+"</span></div></div></div>"));
     
     $(this).css('left', '+=' + 60);
 

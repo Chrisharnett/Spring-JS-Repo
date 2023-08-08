@@ -8,10 +8,13 @@ let commentId = 0;
 let likeCountDict = []
 
 //Create a random user with AJAX
-const getUser = () => {
-    return  fetch("https://jsonplaceholder.typicode.com/users")
-                .then( response => response.json() )
-                .then(user => {return user})
+const getUser = async () => {
+    const domain = "https://jsonplaceholder.typicode.com";
+    const userResponse = await fetch (`$(domain)/users`);
+    const user = await userResponse.json();
+
+    return user.username;
+    
 };
 
 // Closure to add a like
@@ -30,10 +33,10 @@ const timeUpdate = () =>{
     $('#userDate').text((new Date().toLocaleString()));
 };
 
-const collect = (comment) => {
-    // Collect all the comment and subcomment children of the #latestComment class in an array. Make a function that's called.
-    allComments.push(comment);
-    const json = JSON.stringify(allComments);
+const collect = () => {
+    // Collect all the comment and subcomment children of the #latestComment class in an array.
+    let comments = allComments.filter(c => c );
+    const json = JSON.stringify(comments);
     localStorage.comments = json;
 };
 
@@ -42,16 +45,11 @@ const timeStamp = () => {
     return (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
 };
 
-const collectLikes = (id, likeCount) => {
-    let l = {
-        element: '#likeCount' + id,
-        likeCount: likeCount
-    }
-    likeCountDict.push(l)
-    
-    const jsonLikes = JSON.stringify(likeCountDict);
+const collectLikes = () => {
+    let likes = likeCountDict.filter(l => l);
+    const jsonLikes = JSON.stringify(likes);
     localStorage.likes = jsonLikes;
-}
+};
 
 const createAComment = (comment, user, id, previousCommentId, postTimeStamp) => {   
 
@@ -67,7 +65,8 @@ const createAComment = (comment, user, id, previousCommentId, postTimeStamp) => 
     }
     
     //Store the comment.
-    collect(c);
+    allComments.push(c);
+    collect();
     
 
     // Update timestamp.
@@ -80,20 +79,14 @@ const createAComment = (comment, user, id, previousCommentId, postTimeStamp) => 
     $('#likeComment' + c.getId()).on("click", () => {   
         $('#likeCount' + c.getId()).text(l.add())
         c.setLikeCount($('#likeCount' + c.getId()).text())
-        collectLikes(c.id, c.likeCount);
+        let like = {
+            element: '#likeCount' + id,
+            likeCount: c.likeCount
+        }
+        likeCountDict.push(like);
+        collectLikes();
     });
-
-    // Wastebasket to delete the comment within 30 secs.
-    $(".wastebasket" + c.getId()).on('click',() => {
-        // delete the comment.
-        $("#commentBox" + c.getId()).remove();
-        // remove the comment from the allComments array       
-    });
-    // Turn off delete listener and remove icon.
-    setTimeout(function () {
-        $(".wastebasket" + c.getId()).off();
-        $(".wastebasket" + c.getId()).css('display', 'none');
-    }, 30000);
+    
 
     $("#up" + c.getId()).on("click", () => {
         // TODO: expand multi-line comment
@@ -104,7 +97,26 @@ const createAComment = (comment, user, id, previousCommentId, postTimeStamp) => 
     });
 
     let previous = commentId;
-    // create subcomment listener
+    // create subcomment listener to delete comment within 30 seconds
+    $("#addSubComment" + c.getId()).on("contextmenu", () => {
+        // right click to delete the comment.
+        $("#commentBox" + c.getId()).remove();
+        // remove the comment from likeCounts from local storage.
+        allComments = allComments.filter( (comment) => comment.getId() != c.getId());
+        collect();
+        likeCountDict = likeCountDict.filter((l) => l.element != ('#likeCount' + c.getId()));
+        collectLikes();
+        
+    });
+
+    // Turn off delete listener and remove icon.
+    setTimeout(function () {
+        $("#addSubComment" + c.getId()).off("contextmenu");
+        // update text in tooltip
+        $("#addSubComment" + c.getId()).attr('title', 'Leave a comment.')
+    }, 30000);
+
+    // subcomment listener to create a subcomment on left click.
     $("#addSubComment" + c.getId()).on("click", () => {       
         let user = "STEVEDEFAULT";
         commentId ++;
@@ -117,7 +129,7 @@ const createAComment = (comment, user, id, previousCommentId, postTimeStamp) => 
     $("#newComment").val("")
     $("#newComment").focus()
     //Call change user at the end.
-}
+};
 
 $( () => {
     // TODO check for persistent json to make comments stay 'sessionstorage.' vs localstorage
@@ -129,25 +141,25 @@ $( () => {
             createAComment(comment.comment, comment.user, comment.id, comment.previousCommentId, d);
             if (comment.likeCount > 0){
                 $('#likeCount' + comment.id).text(comment.likeCount);  
-            }
-                         
+            }            
         };
-        
-    }
+    };
 
     const jsonLikes = localStorage.likes;
     if (jsonLikes){
         likeCountDict = JSON.parse(jsonLikes);
-    }
+    };
     for (let target of likeCountDict){
         let t = target.element;
         $(t).text(target.likeCount);
-    }
+    };
 
     // TODO use AJAX to get a random user and change it with each comment.
-    let user = "ChrisDEFAULT";
+    let user = getUser();
 
-    //update time
+
+    // Display and update time
+    $('#userDate').text((new Date().toLocaleString()));
     setInterval(timeUpdate, 60000);
    
     // Display the user name
