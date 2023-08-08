@@ -7,14 +7,15 @@ let commentId = 0;
 
 let likeCountDict = []
 
+let currentUser = 'default'
+
 //Create a random user with AJAX
 const getUser = async () => {
     const domain = "https://jsonplaceholder.typicode.com";
-    const userResponse = await fetch (`$(domain)/users`);
-    const user = await userResponse.json();
-
-    return user.username;
-    
+    const r = await fetch(`${domain}/users/${Math.ceil(Math.random() * 10)}`)
+    const user = await r.json();
+    currentUser = user.username
+    return currentUser;
 };
 
 // Closure to add a like
@@ -51,7 +52,7 @@ const collectLikes = () => {
     localStorage.likes = jsonLikes;
 };
 
-const createAComment = (comment, user, id, previousCommentId, postTimeStamp) => {   
+const createAComment = async (comment, user, id, previousCommentId, postTimeStamp) => {   
 
     // create a new comment.
     let c = new Comment(comment, user, id, previousCommentId, postTimeStamp);
@@ -88,12 +89,12 @@ const createAComment = (comment, user, id, previousCommentId, postTimeStamp) => 
     });
     
 
-    $("#up" + c.getId()).on("click", () => {
-        // TODO: expand multi-line comment
+    $("#contract" + c.getId()).on("click", () => {
+        $('#' + c.getId()).css('white-space', 'nowrap');
     });
 
-    $("#down" + c.getId()).on("click", () => {
-        //TODO: Contract multi-line comment
+    $("#expand" + c.getId()).on("click", () => {
+        $('#' + c.getId()).css('white-space', 'normal');
     });
 
     let previous = commentId;
@@ -118,20 +119,27 @@ const createAComment = (comment, user, id, previousCommentId, postTimeStamp) => 
 
     // subcomment listener to create a subcomment on left click.
     $("#addSubComment" + c.getId()).on("click", () => {       
-        let user = "STEVEDEFAULT";
         commentId ++;
         let id = commentId;
-        createAComment($("#newComment").val(), user, id, previous, timeStamp()); 
+        createAComment($("#newComment").val(), $('#user').text(), id, previous, timeStamp()); 
             
     });
 
     // Clear and focus newComment box
     $("#newComment").val("")
     $("#newComment").focus()
-    //Call change user at the end.
+    // Change user at the end.
+    try{
+        let user = await getUser();
+        // Display the user name
+        $('#user').text(user);
+    }
+    catch(e){
+        $('#user').text('default');
+    }
 };
 
-$( () => {
+$( async () => {
     // TODO check for persistent json to make comments stay 'sessionstorage.' vs localstorage
     const jsonComments = localStorage.comments;
     if (jsonComments) {
@@ -155,15 +163,21 @@ $( () => {
     };
 
     // TODO use AJAX to get a random user and change it with each comment.
-    let user = getUser();
-
+    try{
+        let user = await getUser();
+        // Display the user name
+        $('#user').text(user);
+    }
+    catch(e){
+        $('#user').text('default');
+    }
+    
 
     // Display and update time
     $('#userDate').text((new Date().toLocaleString()));
     setInterval(timeUpdate, 60000);
    
-    // Display the user name
-    $('#user').text(user);
+    
     
     // Set and display the pic likes.
     let likes = addLikes(0);
@@ -176,8 +190,8 @@ $( () => {
         //increment the comment id.
         commentId ++; 
         let d = new Date();
-        let timestamp = d.getMonth() + "/" + d.getDay() + "/" + d.getYear() + " " + d.getHours() + ":" + d.getMinutes();
-        let comment = createAComment($("#newComment").val(), user, commentId, -1, timeStamp());
+        // let timestamp = d.getMonth() + "/" + d.getDay() + "/" + d.getYear() + " " + d.getHours() + ":" + d.getMinutes();
+        createAComment($("#newComment").val(), $('#user').text(), commentId, -1, timeStamp());
         });
     
     });

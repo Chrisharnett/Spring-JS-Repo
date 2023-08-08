@@ -71,14 +71,12 @@
     padding: 5px;
     width: 500px;
     left: 0px;
-    /* z-index: 10; */
+    height: auto;
 }
 .subCommentBox{
     position: relative;
-    width: 600px;
     display: inline-flex;
     left: 0px;
-    /* z-index: 0; */
 }
 .subComment{
     position: relative;
@@ -98,19 +96,29 @@
 .daterow {
     margin: 3px;
     gap: 30px;
-    display: flex;
+    display: inline-flex;
+    justify-content: space-between
 }
 .commentRow{
     margin: 3px;
-    display: inline;
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    height: auto;
+}
+.comment{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 footer {
-    width: 75%;
+    width: 100%;
     display: inline;
 }
 
 .commentView, .stats, #userDate {
+    position: relative;
     float: right;
 }
 
@@ -118,18 +126,19 @@ footer {
     float: left;
 }
 .newCommentClass{
-    width: 75%;
     padding: 10px;
 }
+
 #newComment{
     padding: 5px;
     border: 3px solid #FFD39A;
     border-radius: 15px;
     margin: 10px;
-    height: 50px;
-    width: 100%;
+    height: auto;
+    width: 500px;
     justify-content: end;
     background-color: azure;
+
 }
 #add_comment{
     right: 0px;
