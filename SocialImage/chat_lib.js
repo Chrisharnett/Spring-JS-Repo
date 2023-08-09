@@ -29,6 +29,7 @@ class Comment {
     timeString += months.toString().padStart(2, '0') + " ";
     let nowDay = now.getDate();
     let d = 0;
+    // figure the number of days between two dates based on different month lengths.
     if (nowDay > postDate.getDate() || nowDay == postDate.getDate()){
       d = nowDay - postDate.getDate();
     }

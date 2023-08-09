@@ -16,12 +16,11 @@
 }
 .iconOverlay{
     position: absolute;
-    z-index: 2;
     right: 0;
     bottom: 0;
     background-color: aliceblue;
-    opacity: 0.7;
-    padding: 2px;
+    opacity: .5;
+    padding: 5px;
 }
 
 .iconOverlay > * {
@@ -127,21 +126,19 @@ footer {
         position: relative;
     }
     .pic{
-        width: 400;
+        max-width: 400;
     }
     .iconOverlay{
         position: absolute;
-        z-index: 2;
         right: 0;
         bottom: 0;
         background-color: aliceblue;
-        opacity: 0.7;
-        padding: 2px;
-    
+        opacity: .5;
+        padding: 5px;
     }
     
-    .iconOverlay > * {
-        padding: 2px;
+    .iconOverlay > *, .stats > * , .commentView > * {
+        padding: 3px;
     }
     
     .toolTipContainer{
@@ -170,12 +167,12 @@ footer {
         border: 3px solid peachpuff;
         left: 30px;
     }
+
     #connector{
         position: relative;
         font-size: 100px;
         left: 50px;
         bottom: 60px;
-        z-index: 0;
         height: 100px;
     }
     
