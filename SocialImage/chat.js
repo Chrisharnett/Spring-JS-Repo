@@ -47,7 +47,7 @@ const timeStamp = () => {
 };
 
 const collectLikes = () => {
-    let likes = likeCountDict.filter(l => l);
+    let likes = likeCountDict.filter(l => l != null);
     const jsonLikes = JSON.stringify(likes);
     localStorage.likes = jsonLikes;
 };
@@ -80,11 +80,8 @@ const createAComment = async (comment, user, id, previousCommentId, postTimeStam
     $('#likeComment' + c.getId()).on("click", () => {   
         $('#likeCount' + c.getId()).text(l.add())
         c.setLikeCount($('#likeCount' + c.getId()).text())
-        let like = {
-            element: '#likeCount' + id,
-            likeCount: c.likeCount
-        }
-        likeCountDict.push(like);
+        
+        likeCountDict.push(id);
         collectLikes();
     });
     
@@ -105,7 +102,7 @@ const createAComment = async (comment, user, id, previousCommentId, postTimeStam
         // remove the comment from likeCounts from local storage.
         allComments = allComments.filter( (comment) => comment.getId() != c.getId());
         collect();
-        likeCountDict = likeCountDict.filter((l) => l.element != ('#likeCount' + c.getId()));
+        likeCountDict = likeCountDict.filter((l) => l != c.getId());
         collectLikes();
         
     });
@@ -153,15 +150,6 @@ $( async () => {
         };
     };
 
-    const jsonLikes = localStorage.likes;
-    if (jsonLikes){
-        likeCountDict = JSON.parse(jsonLikes);
-    };
-    for (let target of likeCountDict){
-        let t = target.element;
-        $(t).text(target.likeCount);
-    };
-
     // TODO use AJAX to get a random user and change it with each comment.
     try{
         let user = await getUser();
@@ -176,15 +164,30 @@ $( async () => {
     // Display and update time
     $('#userDate').text((new Date().toLocaleString()));
     setInterval(timeUpdate, 60000);
-   
     
-    
+
     // Set and display the pic likes.
     let likes = addLikes(0);
     $('#heartPic').on("click", () => {
         $('#likeCount0').text(likes.add());
+        likeCountDict.push(0);
         collectLikes(0, $('#likeCount0').text())
     });
+
+    const jsonLikes = localStorage.likes;
+    let storedLikes = ''
+    if (jsonLikes){
+        storedLikes = JSON.parse(jsonLikes);
+    };
+    localStorage.removeItem("likes");
+    for (let id of storedLikes){
+        if (id == 0){
+            $('#heartPic').trigger('click')
+        }
+        else{
+            $('#likeComment' + id).trigger('click');
+        }
+    };
         
     $('#picComment').on("click", () => {
         //increment the comment id.
