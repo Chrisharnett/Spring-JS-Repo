@@ -12,36 +12,51 @@ class Comment {
     this.likeCount = count;
   }
 
-
   getTimeString = () => {
     let now = new Date();
     let postDate = new Date(this.postTimeStamp)
     let timeString = ''
     let dateDiff = now.getTime() - postDate.getTime();
-    let m = Math.floor((dateDiff / 1000 / 60) % 60);
-    let h = Math.floor((dateDiff / 1000 /60 / 60) % 24);
-     let years = now.getFullYear() - postDate.getFullYear();
-     if (years > 0){
-         timeString += years.toString() + " years ";
-     };
-     let nowMonth = now.getMonth();
-     if (nowMonth < postDate.getMonth()){
-       nowMonth += 11;
-     }
-     let months = nowMonth - postDate.getMonth();
-     if (months > 0){
-         timeString += months.toString() + " months ";
-     };
-     let nowDay = now.getDay();
-     if (nowDay < postDate.getDay()){
-       nowDay += 6;
-     }
-     let days = nowDay - postDate.getDay();
-     if (days > 0){
-         timeString += days.toString() + " days ";
-    };
-   
-    return   h + ' hours:' + m + 'minutes ago ' + this.user + ' said';
+    
+    let y = Math.floor((dateDiff/1000/60/60/24/365));
+    timeString += y.toString().padStart(2, '0') + " ";
+
+    let nowMonth = now.getMonth();
+    if (nowMonth < postDate.getMonth()){
+      nowMonth += 12;
+    }
+    let months = nowMonth - postDate.getMonth();
+    timeString += months.toString().padStart(2, '0') + " ";
+    let nowDay = now.getDate();
+    let d = 0;
+    if (nowDay > postDate.getDate() || nowDay == postDate.getDate()){
+      d = nowDay - postDate.getDate();
+    }
+    else {
+      daysInMonth = 31;
+      if (postDate.getMonth == 3 || postDate.getMonth == 5 || postDate.getMonth == 8 || 
+        postDate.getMonth == 10){
+          daysInMonth = 30
+      }
+      else if(postDate.getMonth == 1){
+          daysInMonth = 28
+      }
+      d = (daysInMonth + nowDay) - postDate.getDate;
+      // If this year or the post year are leap years, add a day.
+      if (now.getFullYear % 4 == 0 || postDate.getFullYear % 4 == 0){
+        d += 1
+      }
+      // Add 1 day for every 4 years difference.
+      if (y > 4){
+        d += Math.floor(y / 4);
+      }; 
+    }
+
+    timeString += d.toString().padStart(2, '0') + " ";
+  let m = Math.floor((dateDiff / 1000 / 60) % 60);
+  let h = Math.floor((dateDiff / 1000 /60 / 60) % 24);
+  
+  return   timeString += h.toString().padStart(2, '0') + ':' + m.toString().padStart(2, '0') + ' ago ' + this.user + ' said';
   }
   
   getId(){
