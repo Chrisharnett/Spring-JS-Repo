@@ -1,0 +1,14 @@
+
+table {
+    width: 90%;
+    max-width: 400px;
+}
+td {
+    width: 33.33%;
+    position: relative;
+    background: greenyellow;
+}
+.mole {
+    aspect-ratio: 1 / 1;
+    background: greenyellow;
+}
